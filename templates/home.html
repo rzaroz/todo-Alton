@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Alton - TestProject</title>
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/jQuery3.7.min.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+</head>
+<body>
+
+    <div class="todo">
+        <div class="welcome">
+            <a class="log-out" href="{% url 'out' %}">
+                <h4>
+                    خروج
+                </h4>
+            </a>
+            <h5>{{ user.username }}</h5>
+            <h4>خوش آمدید</h4>
+        </div>
+        <div class="new-todo">
+            <button name="submit" class="submit">
+                <h4>
+                    ثبت
+                </h4>
+            </button>
+            <input type="text" name="text-new" placeholder="متن تودوی جدید را وارد کنید" id="new_todo_text">
+        </div>
+        <div class="csrf">
+            {% csrf_token %}
+        </div>
+        {% if todos %}
+            {% for t in todos %}
+                <div class="todo-card">
+                    <div class="update_containe"></div>
+                    <input type="hidden" value="{{ t.id }}" id="todo_id">
+                    <div class="btns">
+                        <button class="delete"><h4>حذف</h4></button>
+                        <button class="update"><h4>آپدیت</h4></button>
+                    </div>
+                    <p>{{ t.text }}</p>
+                    <h3>{{ t.id }}</h3>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-todo">
+                <h3> !شما در حال حاضر چیزی ثبت نکرده اید</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

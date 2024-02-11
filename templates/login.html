@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>login</title>
+</head>
+<body>
+
+    {% if messages %}
+        <ul class="messages" style="color: #ff1f1f; direction: rtl">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" class="login-container">
+        {% csrf_token %}
+        <h1>ورود به تست</h1>
+        <label for="username">نام کاربری</label>
+        <input type="text" name="username" id="" placeholder="لطفا نام کاربری خود را وارد کنید . . .">
+        <label for="password">رمز ورود</label>
+        <input type="password" name="password" id="" placeholder="رمز عبور خود را وارد کنید . . .">
+        <button type="submit">
+            <h3>ورود</h3>
+        </button>
+        <a href="{% url 'sign' %}" style="color: white; text-decoration: none;">
+            <h4>اکانت نداری؟ ثبت نام</h4>
+        </a>
+    </form>
+</body>
+</html>
